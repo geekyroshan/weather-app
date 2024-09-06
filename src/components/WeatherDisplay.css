@@ -95,3 +95,37 @@
   font-size: 14px;
   color: #666;
 }
+
+/* Updated Background with Weather Conditions */
+/* Example for a sunny weather background */
+.weather-app.sunny {
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+  transition: background 1s ease-in-out;
+}
+
+/* Example for a cloudy weather background */
+.weather-app.cloudy {
+  background: linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%);
+  transition: background 1s ease-in-out;
+}
+
+/* Example for a rainy weather background */
+.weather-app.rainy {
+  background: linear-gradient(135deg, #3a6186 0%, #89253e 100%);
+  transition: background 1s ease-in-out;
+}
+
+/* Add background animation to make it more dynamic */
+@keyframes cloudMove {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.weather-app {
+  background-size: 200% 200%;
+  animation: cloudMove 60s linear infinite;
+}

@@ -1,7 +1,7 @@
 // src/components/WeatherDisplay.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import './WeatherDisplay.css'; // Add a separate CSS for the new styling
+import './WeatherDisplay.css'; // Import the updated CSS
 
 const WeatherDisplay = () => {
   const [city, setCity] = useState('');
@@ -22,8 +22,18 @@ const WeatherDisplay = () => {
     }
   };
 
+  // Function to determine which class to apply based on weather
+  const getWeatherClass = () => {
+    if (!weather) return ''; // Default class
+    const mainWeather = weather.weather[0].main.toLowerCase();
+    if (mainWeather.includes('clear')) return 'sunny';
+    if (mainWeather.includes('clouds')) return 'cloudy';
+    if (mainWeather.includes('rain')) return 'rainy';
+    return ''; // Default fallback
+  };
+
   return (
-    <div className="weather-app">
+    <div className={`weather-app ${getWeatherClass()}`}>
       <div className="weather-card">
         <input
           type="text"
@@ -41,7 +51,6 @@ const WeatherDisplay = () => {
         {weather && (
           <div className="weather-container">
             <div className="weather-icon">
-              {/* Use an actual weather icon here based on weather condition */}
               <img
                 src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@4x.png`}
                 alt="Weather Icon"
@@ -60,7 +69,6 @@ const WeatherDisplay = () => {
             </div>
 
             <div className="forecast">
-              {/* Hardcoded forecast for simplicity; you'd need to fetch this via a different API call */}
               <div className="forecast-item">
                 <p>Tomorrow</p>
                 <p>21°C</p>
